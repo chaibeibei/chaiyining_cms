@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chaiyining.cms.dao.TousuDao">
+	<select id="select" resultType="Tousu">
+		select * 
+		from cms_tousu
+	</select>
+	
+	<select id="selectById" resultType="Tousu">
+		select * from cms_tousu where id=#{id}
+	</select>
+	
+	<select id="count" resultType="int">
+		select count(1) from cms_tousu
+	</select>
+	
+	<insert id="insert">
+		insert into cms_tousu (articleId, userId, content, 
+      created)
+    values (#{tousu.articleId}, #{tousu.userId}, #{tousu.content}, 
+      #{tousu.created})
+	</insert>
+	
+	<update id="update">
+		update cms_tousu
+	    set articleId = #{tousu.articleId},
+	      userId = #{tousu.userId},
+	      content = #{tousu.content},
+	      created = #{tousu.created}
+	    where id = #{tousu.id}
+	</update>
+	
+	<delete id="deleteById">
+		delete from cms_tousu where id=#{id}
+	</delete>
+	
+	<delete id="deleteByIds">
+		delete from cms_tousu where id in(${ids})
+	</delete>
+</mapper>

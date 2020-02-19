@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chaiyining.cms.dao.ArticleVoteDao">
+  <select id="select" resultType="ArticleVote">
+		select * from cms_article_vote
+	</select>
+	
+	<select id="selectById" resultType="ArticleVote">
+		select * from cms_article_vote where id=#{id}
+	</select>
+	
+	<select id="count" resultType="int">
+		select count(1) from cms_article_vote
+	</select>
+	
+	<insert id="insert">
+		insert into cms_article_vote (article_id, user_id, option
+	      )
+	    values (#{articleVote.articleId}, #{articleVote.userId}, #{articleVote.option}
+	      )
+	</insert>
+	
+	<update id="update">
+		update cms_article_vote
+	    set article_id = #{articleVote.articleId},
+	      user_id = #{articleVote.userId},
+	      option = #{articleVote.option}
+	    where id = #{articleVote.id}
+	</update>
+	
+	<delete id="deleteById">
+		delete from cms_article_vote where id=#{id}
+	</delete>
+	
+	<delete id="deleteByIds">
+		delete from cms_article_vote where id in(${ids})
+	</delete>
+</mapper>

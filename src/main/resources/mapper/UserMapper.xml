@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chaiyining.cms.dao.UserDao">
+	<select id="select" resultType="User">
+		select * from cms_user
+		<where>
+			<if test="user.username!=null and user.username!=''">
+				username like '%${user.username}%'
+			</if>
+			<if test="user.nickname!=null and user.nickname!=''">
+				nickname like '%${user.nickname}%'
+			</if>
+		</where>
+	</select>
+	
+	<select id="selectByUsername" resultType="User">
+		select * from cms_user
+		where username=#{user.username}
+	</select>
+	
+	<select id="selectById" resultType="User">
+		select * from cms_user where id=#{id}
+	</select>
+	
+	<select id="count" resultType="int">
+		select count(1) from cms_user
+	</select>
+	
+	<insert id="insert">
+		insert into cms_user (username, password, nickname, 
+	      birthday, gender, locked, 
+	      score, role, url, create_time, 
+	      update_time)
+	    values (#{user.username}, #{user.password}, #{user.nickname}, 
+	      #{user.birthday}, #{user.gender}, #{user.locked}, 
+	      #{user.score}, #{user.role}, #{user.url}, #{user.createTime}, 
+	      #{user.updateTime})
+	</insert>
+	
+	<update id="updateLocked">
+		update cms_user
+	    set 
+	      locked = #{locked}
+	    where id = #{userId}
+	</update>
+	
+	<update id="update">
+		update cms_user
+	    set
+	      nickname = #{user.nickname},
+	      birthday = #{user.birthday},
+	      gender = #{user.gender},
+	      url = #{user.url},
+	      update_time = #{user.updateTime},
+	      headimg = #{user.headimg}
+	    where id = #{user.id}
+	</update>
+	
+	<delete id="deleteById">
+		delete from cms_user where id=#{id}
+	</delete>
+	
+	<delete id="deleteByIds">
+		delete from cms_user where id in(${ids})
+	</delete>
+</mapper>

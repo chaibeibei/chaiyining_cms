@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chaiyining.cms.dao.SlideDao">
+	<select id="select" resultType="Slide">
+		select * from cms_slide
+	</select>
+	
+	<select id="selectById" resultType="Slide">
+		select * from cms_slide where id=#{id}
+	</select>
+	
+	<select id="count" resultType="int">
+		select count(1) from cms_slide
+	</select>
+	
+	<insert id="insert">
+		insert into cms_slide (title, picture, url
+      )
+    values (#{slide.title}, #{slide.picture}, #{slide.url}
+      )
+	</insert>
+	
+	<update id="update">
+		update cms_slide
+	    set title = #{slide.title},
+	      picture = #{slide.picture},
+	      url = #{slide.url}
+	    where id = #{slide.id}
+	</update>
+	
+	<delete id="deleteById">
+		delete from cms_slide where id=#{id}
+	</delete>
+	
+	<delete id="deleteByIds">
+		delete from cms_slide where id in(${ids})
+	</delete>
+</mapper>

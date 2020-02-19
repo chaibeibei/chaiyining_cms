@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chaiyining.cms.dao.CollectDao">
+  
+ <select id="collectList"  resultType="Collect">
+ 	select * from cms_collect order by created desc
+ </select>
+ 
+ <insert id="addCollect" >
+ insert into cms_collect values(null,#{text},#{url},#{created},#{user_id}) 
+ </insert>
+ 
+ 
+ <select  id="selectByid"  resultType="Collect">
+ select * from cms_collect where id=#{id}
+ </select>
+ 
+ <delete id="deleColl">
+ delete  from cms_collect where id=#{id}
+ </delete>
+</mapper>
